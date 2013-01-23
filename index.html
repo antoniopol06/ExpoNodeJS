@@ -102,6 +102,19 @@ app.get('/', routes.index);</p>
 <p>El primer parámetro '/', se refiere a la ruta, en este caso al ser la página principal sería así, si quisiésemos añadir una nueva para un enlace href="/quienessomos", sería app.get('/quienessomos').</p>
 
 <p>El segundo parámetro routes.index, se refiere quién se va encargar de realizar las operaciones correspondientes a este mapeo, y es aquí cuando pasamos al paso 2.</p>
+<p><b>Importante</b>. Es muy importante poner el orden de los mapeos correctamente, es decir, que funcionan por orden, si tenemos el siguiente ejemplo</b></p>
+<p>
+  app.get('/:mensaje',routes.mensajes);<br/>
+  app.get('/quienessomos',routes.somos);
+</p>
+<p>
+  Siempre que escribamos en la URL /quienssomos, va a tomarlo como que estamos enviado quienessomos como variable, ya que al cumplirse la primera
+  se olvida de el resto. En el ejemplo anterior para que funcionase correctamente sería al revés.
+</p>
+<p>
+app.get('/quienessomos',routes.somos);<br/>
+  app.get('/:mensaje',routes.mensajes);
+</p>
 
 <p>2. Routes: Aquí el archivo index.js se va encargar de hacer las operaciones pertinentes para cada mapeo de rutas. Normalmente se pueden realizar dos operaciones finales: Renderizar una plantilla y pasaríamos al paso 3 o redireccionar a otra página que volveríamos al paso 1.
 <strong>index.js</strong>
