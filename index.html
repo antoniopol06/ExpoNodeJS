@@ -94,35 +94,35 @@ Como su nombre indica, va almacenar las plantillas (archivos con extensión .jad
 
 <p>Normalmente los tres pasos fundamentales son los siguientes:</p>
 
-<ol>
-<li>Mapear la ruta: Es decir, cuando un usuario entra por primera vez en nuestra página principal sería de la siguiente forma.
+<p>1. Mapear la ruta: Es decir, cuando un usuario entra por primera vez en nuestra página principal sería de la siguiente forma.
 <strong>app.js</strong>
-app.get('/', routes.index);</li>
-</ol><p>En este caso es app.get porque se envía mediante la URL (GET), si se enviase la información a través de un formulario POST, pasaría a app.post.</p>
+app.get('/', routes.index);</p>
+<p>En este caso es app.get porque se envía mediante la URL (GET), si se enviase la información a través de un formulario POST, pasaría a app.post.</p>
 
 <p>El primer parámetro '/', se refiere a la ruta, en este caso al ser la página principal sería así, si quisiésemos añadir una nueva para un enlace href="/quienessomos", sería app.get('/quienessomos').</p>
 
 <p>El segundo parámetro routes.index, se refiere quién se va encargar de realizar las operaciones correspondientes a este mapeo, y es aquí cuando pasamos al paso 2.</p>
 
-<ol>
-<li>Routes: Aquí el archivo index.js se va encargar de hacer las operaciones pertinentes para cada mapeo de rutas. Normalmente se pueden realizar dos operaciones finales: Renderizar una plantilla y pasaríamos al paso 3 o redireccionar a otra página que volveríamos al paso 1.
+<p>2. Routes: Aquí el archivo index.js se va encargar de hacer las operaciones pertinentes para cada mapeo de rutas. Normalmente se pueden realizar dos operaciones finales: Renderizar una plantilla y pasaríamos al paso 3 o redireccionar a otra página que volveríamos al paso 1.
 <strong>index.js</strong>
 exports.index = function(req, res){
 res.render('index', { title: 'Bienvenido al Chat' });
-};</li>
-</ol><p>exports.index, en este caso es .index porque en app.js hemos dicho que quién se va encargar de esta ruta es routes.index.</p>
+};</p>
+<p>exports.index, en este caso es .index porque en app.js hemos dicho que quién se va encargar de esta ruta es routes.index.</p>
 
 <p>Es una función que tiene dos parámetros que nos va a permitir recibir parámetros mediant URL, formularios o sesiones, o, renderizar o redireccionar entre otras cosas a otras URLs</p>
 
-<p><a href="http://expressjs.com/api.html#req.params">REQ</a>
+<p><a href="http://expressjs.com/api.html#req.params">REQ</a><br/>
 <a href="http://expressjs.com/api.html#res.status">RES</a></p>
 
 <p>En este ejemplo, estamos renderizando el archivo index.jade y le enviamos como parámetro el título que va a tener la página.
 res.render('index', {title :'Bienvenido al Chat'});</p>
 
-<ol>
-<li>Views: renderizar plantilla. Si se desea conocer más las plantillas Jade, ir al enlace que he puesto al comienzo de esta Wiki.</li>
-</ol><h1>Chat</h1>
+<p>
+  3. Views: renderizar plantilla. Si se desea conocer más las plantillas Jade, ir al enlace que he puesto al comienzo de esta Wiki.
+</p>
+
+<h1>Chat</h1>
 
 <p>En este primer ejercicio, vamos a tratar de realizar un formulario inicial para que el usuario ingrese su nick o nombre de usuario, y si no existe entre los usuarios conectados que le deje pasar al chat creando una sesión y mostrándole los diferentes usuarios que estan conectados, y si ya existe ese usuario que muestre una página con el error que ese usuario ya esta siendo utilizado. Es un ejemplo sencillo pero que recomiendo realizar para ir aprendiendo los conceptos básicos de NodeJS.</p>
 
