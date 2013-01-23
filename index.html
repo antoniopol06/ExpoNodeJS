@@ -1,0 +1,141 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Wiki NodeJS+Express - Iniciación by antoniopol06</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+
+      <header>
+        <h1>Wiki NodeJS+Express - Iniciación</h1>
+        <p>Exposición de un ejemplo básico usando NodeJS y el Framework Express</p>
+      </header>
+
+      <div id="banner">
+        <span id="logo"></span>
+
+        <a href="https://github.com/antoniopol06/ExpoNodeJS" class="button fork"><strong>View On GitHub</strong></a>
+        <div class="downloads">
+          <span>Downloads:</span>
+          <ul>
+            <li><a href="https://github.com/antoniopol06/ExpoNodeJS/zipball/master" class="button">ZIP</a></li>
+            <li><a href="https://github.com/antoniopol06/ExpoNodeJS/tarball/master" class="button">TAR</a></li>
+          </ul>
+        </div>
+      </div><!-- end banner -->
+
+    <div class="wrapper">
+      <nav>
+        <ul></ul>
+      </nav>
+      <section>
+        <p>Bienvenido a la exposición de Generación Mejorandola de NodeJS con el FrameWork Express
+Esta exposición trata de conocer esta nueva tecnología que nos permite ejecutar Javascript desde el lado del servidor.</p>
+
+<p>Antes de empezar a explicar el objetivo del primer ejercicio os dejo varios enlaces de interés para poder instalar NodeJS:
+<a href="https://sekati.com/etc/install-nodejs-on-debian-squeeze">Instalar NodeJS en Debian</a>
+<a href="http://www.youtube.com/watch?v=3nnpCXtPXHg">Video de instalación NodeJS en Window gracias a Leonidas</a></p>
+
+<p>NodeJS tiene multitud de módulos que nos facilitan el desarrollo ágil de aplicaciones web. Hoy nos vamos a centrar en dos módulos. <strong>Express</strong> y <strong>Jade</strong></p>
+
+<h1>Express</h1>
+
+<p>Express es el Framework que vamos a utilizar para realizar aplicaciones web con NodeJS y nos va a facilitar mucho las cosas y, por defecto, utiliza plantillas <em>Jade</em> , es por eso que instalamos también las plantillas Jade.
+Puedes encontrar toda la información de Express en su <a href="http://expressjs.com/">páginan oficial</a></p>
+
+<h1>Jade</h1>
+
+<p>Jade son las plantillas que usa por defecto.
+Puedes encontrar toda la información de estas plantillas en su página oficial <a href="http://jade-lang.com/">página oficial</a></p>
+
+<h1>Instalación</h1>
+
+<p>Para instalar estos dos módulos deberemos utilizar el siguiente comando en el directorio que queramos crear nuestra aplicación.
+npm install express</p>
+
+<p>npm install jade</p>
+
+<p>Por último, deberemos tener el comando express como variable global, esto se consigue de la siguiente manera:
+npm install express -g</p>
+
+<p>Una vez tengamos express globalmente podemos crear nuestra primera aplicación de la siguiente manera:
+express chat</p>
+
+<p>En nuestro caso, como queremos utilizar sesiones, haremos lo siguiente:
+express --sessions chat</p>
+
+<p>Una vez creada la aplicación, se habrán creado los siguientes ficheros y directorios:
+<strong>package.json</strong>
+Sirve para definir la aplicación, el nombre de la misma, su versión y que dependencias vamos a usar, en este caso es importante poner express y jade con sus correspondientes versiones (npm info express versión)
+<strong>app.jss</strong>
+En él, nos encontraremos las llamadas a los diferentes módulos, la configuración para lanzar la aplicación, el puerto por el que va a escuchar (por defecto el 3000), el mapeo de rutas y muchas cosas más.
+<strong>public/</strong>
+Son los archivos que los usuarios finales tienen libre acceso, como los Javascript, CSS, imágenes o vídeos.
+<strong>routes/</strong>
+Una vez mapeadas las rutas querremos que hagan algo, es aquí dónde programaremos que hacer en cada caso.
+<strong>views/</strong>
+Como su nombre indica, va almacenar las plantillas (archivos con extensión .jade)</p>
+
+<h1>Funcionamiento básico de NodeJS+Express</h1>
+
+<p>El funcionamiento básico de NodeJS+Express es muy sencillo de entender, y una vez tengamos claro estos conceptos podremos realizar aplicaciones web "estáticas" y tenemos la base para poder empezar a conocer otros módulos como mongodDb o mysql para las bases de datos, o websockets para realizar aplicaciones en tiempo real, lógicamente el instalar un nuevo módulo requiere aprender el funcionamiento de este.</p>
+
+<h2>3 Pasos fundamentales</h2>
+
+<p>Normalmente los tres pasos fundamentales son los siguientes:</p>
+
+<ol>
+<li>Mapear la ruta: Es decir, cuando un usuario entra por primera vez en nuestra página principal sería de la siguiente forma.
+<strong>app.js</strong>
+app.get('/', routes.index);</li>
+</ol><p>En este caso es app.get porque se envía mediante la URL (GET), si se enviase la información a través de un formulario POST, pasaría a app.post.</p>
+
+<p>El primer parámetro '/', se refiere a la ruta, en este caso al ser la página principal sería así, si quisiésemos añadir una nueva para un enlace href="/quienessomos", sería app.get('/quienessomos').</p>
+
+<p>El segundo parámetro routes.index, se refiere quién se va encargar de realizar las operaciones correspondientes a este mapeo, y es aquí cuando pasamos al paso 2.</p>
+
+<ol>
+<li>Routes: Aquí el archivo index.js se va encargar de hacer las operaciones pertinentes para cada mapeo de rutas. Normalmente se pueden realizar dos operaciones finales: Renderizar una plantilla y pasaríamos al paso 3 o redireccionar a otra página que volveríamos al paso 1.
+<strong>index.js</strong>
+exports.index = function(req, res){
+res.render('index', { title: 'Bienvenido al Chat' });
+};</li>
+</ol><p>exports.index, en este caso es .index porque en app.js hemos dicho que quién se va encargar de esta ruta es routes.index.</p>
+
+<p>Es una función que tiene dos parámetros que nos va a permitir recibir parámetros mediant URL, formularios o sesiones, o, renderizar o redireccionar entre otras cosas a otras URLs</p>
+
+<p><a href="http://expressjs.com/api.html#req.params">REQ</a>
+<a href="http://expressjs.com/api.html#res.status">RES</a></p>
+
+<p>En este ejemplo, estamos renderizando el archivo index.jade y le enviamos como parámetro el título que va a tener la página.
+res.render('index', {title :'Bienvenido al Chat'});</p>
+
+<ol>
+<li>Views: renderizar plantilla. Si se desea conocer más las plantillas Jade, ir al enlace que he puesto al comienzo de esta Wiki.</li>
+</ol><h1>Chat</h1>
+
+<p>En este primer ejercicio, vamos a tratar de realizar un formulario inicial para que el usuario ingrese su nick o nombre de usuario, y si no existe entre los usuarios conectados que le deje pasar al chat creando una sesión y mostrándole los diferentes usuarios que estan conectados, y si ya existe ese usuario que muestre una página con el error que ese usuario ya esta siendo utilizado. Es un ejemplo sencillo pero que recomiendo realizar para ir aprendiendo los conceptos básicos de NodeJS.</p>
+
+<p>Por último, podéis ver a través del repositorio <a href="https://github.com/antoniopol06/ExpoNodeJS/tree/master/NodeJS">NodeJS</a> el código de toda la aplicación con sus respectivos comentarios para facilitar el entendimiento del código o ver el vídeo de la exposición a través de este <a href="http://www.youtube.com/watch?v=JbyVR54bH5I&amp;feature=plcp">link</a></p>
+
+<p>Recuerden, no dejen de aprender ;)</p>
+      </section>
+      <footer>
+        <p>Project maintained by <a href="https://github.com/antoniopol06">antoniopol06</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
